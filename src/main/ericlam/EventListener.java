@@ -80,7 +80,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onOpen(InventoryOpenEvent e){
         Player player = (Player) e.getPlayer();
-        if (e.getInventory().getName().equals(Respawngui.getInstance().getGui().getName()) && col.getCountdown().containsKey(player)){
+        if (e.getInventory().getName().equals(Respawngui.getInstance().getGui().getName())){
             Respawngui.getInstance().removePlayerItem(player);
         }
     }
