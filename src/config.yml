@@ -1,0 +1,8 @@
+respawn-delay: 60
+price: 500
+allow-command:
+  - /msg
+  - /reply
+  - /w
+  - /r
+  - /tell

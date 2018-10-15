@@ -1,0 +1,9 @@
+name: RespawnCooldown
+main: main.ericlam.RC
+version: 0.0.1
+api-version: 1.13
+author: hydranapse_
+depend: [Vault]
+commands:
+  book:
+    description: give book

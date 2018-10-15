@@ -1,0 +1,20 @@
+inventory-slot: 9
+inventory-title: "&e確定respawn?"
+skip-item:
+  slot: 3
+  material: EMERALD_BLOCK
+  name: "&a選擇略過"
+  lore:
+    - "&e略過將花費 500 元"
+    - "&e確定略過?"
+wait-item:
+  slot: 7
+  material: REDSTONE_BLOCK
+  name: "&c選擇等待"
+  lore:
+    - "&c點擊以選擇等待"
+death-item:
+  material: BOOK
+  name: "&b打開略過界面"
+  lore:
+    - "&e點擊以打開"
