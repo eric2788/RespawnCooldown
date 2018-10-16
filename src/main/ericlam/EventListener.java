@@ -42,10 +42,16 @@ public class EventListener implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent e){
         Player player = e.getPlayer();
-        Location loc = e.getRespawnLocation();
-        col.getLoc().put(player,loc);
-        if (col.getCountdown().containsKey(player)) return;
+        ConfigManager cf = ConfigManager.getInstance();
+        boolean custom = cf.getConfig().getBoolean("use-custom-spawn-location");
+        if (custom) e.setRespawnLocation((Location)cf.getConfig().get("spawn-location"));
+        if (col.getCountdown().containsKey(player) || player.hasPermission("rsc.skip")) return;
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
+            if (!custom){
+                col.getLoc().put(player.getUniqueId(),player.getLocation());
+            }else{
+                col.getLoc().put(player.getUniqueId(),(Location)cf.getConfig().get("spawn-location"));
+            }
             count.startCountdown(player);
         },20L);
     }
@@ -54,7 +60,10 @@ public class EventListener implements Listener {
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
         if (!col.getRespawning().contains(player.getUniqueId())) return;
-        col.getLoc().put(player,player.getWorld().getSpawnLocation());
+        if (!col.getLoc().containsKey(player.getUniqueId())) {
+            //player.sendMessage("DEBUG: no contain loc");
+            col.getLoc().put(player.getUniqueId(),player.getWorld().getSpawnLocation());
+        }
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
                 count.startCountdown(player);
                 col.getRespawning().remove(player.getUniqueId());
@@ -105,20 +114,24 @@ public class EventListener implements Listener {
                     new Countdown().stopCountDown(player);
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("spent").replace("<money>",price+""));
                     player.closeInventory();
+                    Respawngui.getInstance().removePlayerItem(player);
                 } else{
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("not-enough-money"));
                     player.closeInventory();
+                    Respawngui.getInstance().givePlayerItem(player);
                 }
             } else if (item.getType() == waititem){
                 player.closeInventory();
                 player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("wait"));
+                Respawngui.getInstance().givePlayerItem(player);
             }
             e.setCancelled(true);
         }
+        if (item.getType().equals(Material.AIR)) return;
         if (item.getItemMeta().getDisplayName().equals(Respawngui.getInstance().getSkipbook().getItemMeta().getDisplayName())){
             player.openInventory(gui);
             e.setCancelled(true);
-        } else{ player.sendMessage("not match item");}
+        }
 
 
     }
@@ -131,7 +144,7 @@ public class EventListener implements Listener {
         FileConfiguration config = ConfigManager.getInstance().getConfig();
         String[] command = e.getMessage().split(" ");
         String cmd = command[0];
-        if (config.getStringList("allow-command").contains(cmd)){
+        if (!config.getStringList("allow-command").contains(cmd) && !p.hasPermission("rsc.command.bypass")){
             e.setCancelled(true);
             p.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("blocked-command"));
         }

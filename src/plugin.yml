@@ -1,9 +1,23 @@
 name: RespawnCooldown
 main: main.ericlam.RC
-version: 0.0.1
+version: 0.0.5
 api-version: 1.13
 author: hydranapse_
 depend: [Vault]
 commands:
-  book:
-    description: give book
+  respawncooldown:
+    aliases: [rsc, respwancd, rscooldown]
+    description: 給予玩家插件資訊
+  setspawn:
+    aliases: [rscsetspawn, setrscspawn, setcustomspawn]
+    description: 設置重生點(若果自定義重生點被啟用)
+permissions:
+  rsc.setspawn:
+    description: 設置重生點的權限(若果自定義重生點被啟用)
+    default: op
+  rsc.skip:
+    description: 直接跳過等待
+    default: op
+  rsc.command.bypass:
+    description: 繞過重生冷卻時的指令限制
+    default: op

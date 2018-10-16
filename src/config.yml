@@ -1,5 +1,19 @@
+# Config 設定
+# respawn-delay - 重生間隔
+# price - 跳過等待的價格
+# use-custom-spawn-location - 使用自定義重生位置(若果是true，重生傳送將會使用自定義重生點，
+# 但請確保你并沒有在其他插件設置重生點，以免引起衝突。)
+# spawn-location - 使用/setspawn來設置自定義重生點 (上方為true才有效)
+# allow-command - 重生期間允許使用的指令
+# ==================================
+# 權限:
+# rsc.setspawn - 設置重生點的權限(若果自定義重生點被啟用)
+# rsc.skip - 直接跳過等待
+# rsc.command.bypass - 繞過重生冷卻時的指令限制
 respawn-delay: 60
 price: 500
+use-custom-spawn-location: false
+spawn-location:
 allow-command:
   - /msg
   - /reply

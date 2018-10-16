@@ -9,18 +9,18 @@ import java.util.HashSet;
 import java.util.UUID;
 
 public class Collection {
-    private HashMap<Player, GameMode> gm = new HashMap<>();
+    private HashMap<UUID, GameMode> gm = new HashMap<>();
     private HashMap<Player, Integer> countdown = new HashMap<>();
-    private HashMap<Player, Location> loc = new HashMap<>();
+    private HashMap<UUID, Location> loc = new HashMap<>();
     private HashSet<UUID> respawning = new HashSet<>();
-    private HashMap<Player, Integer> timer = new HashMap<>();
+    private HashMap<UUID, Integer> timer = new HashMap<>();
     private static Collection collect;
 
     public HashMap<Player, Integer> getCountdown() {
         return countdown;
     }
     
-    public HashMap<Player, Integer> getTimer() {
+    public HashMap<UUID, Integer> getTimer() {
         return timer;
     }
 
@@ -29,7 +29,7 @@ public class Collection {
         return collect;
     }
 
-    public HashMap<Player, Location> getLoc() {
+    public HashMap<UUID, Location> getLoc() {
         return loc;
     }
 
@@ -37,7 +37,7 @@ public class Collection {
         return respawning;
     }
 
-    public HashMap<Player, GameMode> getGm() {
+    public HashMap<UUID, GameMode> getGm() {
         return gm;
     }
 }

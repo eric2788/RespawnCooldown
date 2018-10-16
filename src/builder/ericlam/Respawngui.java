@@ -56,12 +56,12 @@ public class Respawngui {
     }
 
     public void givePlayerItem(Player player){
-        if (player.getInventory().contains(skipbook)) return;
+        //if (player.getInventory().contains(skipbook)) return;
         player.getInventory().setItem(22,skipbook);
     }
 
     public void removePlayerItem(Player player){
-        if (!player.getInventory().contains(skipbook)) return;
+        //if (!player.getInventory().contains(skipbook)) return;
         player.getInventory().remove(skipbook);
     }
 
