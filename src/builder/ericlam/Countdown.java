@@ -44,7 +44,7 @@ public class Countdown {
                 gm.remove(player);
                 timer.remove(player);
                 col.getLoc().remove(player);
-                if(player.getInventory().getName().equals(gui.getName)) player.closeInventory();
+                if(player.getInventory().getName().equals(gui.getName())) player.closeInventory();
                 player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("respawned"));
             }
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(cf.msgYamlTranslate("action-bar").replace("<time>",time+"")));
