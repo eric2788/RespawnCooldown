@@ -44,13 +44,16 @@ public class EventListener implements Listener {
         Player player = e.getPlayer();
         ConfigManager cf = ConfigManager.getInstance();
         boolean custom = cf.getConfig().getBoolean("use-custom-spawn-location");
-        if (custom) e.setRespawnLocation((Location)cf.getConfig().get("spawn-location"));
+        boolean customNotNull = cf.getConfig().get("spawn-location") != null;
+        if (custom && customNotNull) e.setRespawnLocation((Location)cf.getConfig().get("spawn-location"));
         if (col.getCountdown().containsKey(player) || player.hasPermission("rsc.skip")) return;
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
-            if (!custom){
-                col.getLoc().put(player.getUniqueId(),player.getLocation());
+            if (custom && customNotNull){
+                 col.getLoc().put(player.getUniqueId(),(Location)cf.getConfig().get("spawn-location"));
+
             }else{
-                col.getLoc().put(player.getUniqueId(),(Location)cf.getConfig().get("spawn-location"));
+                if (custom) player.sendMessage(cf.getPrefix()+"§4錯誤 -> §c本服在沒有為插件設置重生點的情況下開啟了自定義重生位置，請通知管理員。");
+                col.getLoc().put(player.getUniqueId(),player.getLocation());
             }
             count.startCountdown(player);
         },20L);
