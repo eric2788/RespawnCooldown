@@ -120,6 +120,9 @@ public class EventListener implements Listener {
                     new Countdown().stopCountDown(player);
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("spent").replace("<money>",price+""));
                     player.closeInventory();
+                    col.getGm().remove(player.getUniqueId());
+                    col.getTimer().remove(player.getUniqueId());
+                    col.getLoc().remove(player.getUniqueId());
                     Respawngui.getInstance().removePlayerItem(player);
                 } else{
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("not-enough-money"));
