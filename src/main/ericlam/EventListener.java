@@ -52,7 +52,10 @@ public class EventListener implements Listener {
                  col.getLoc().put(player.getUniqueId(),(Location)cf.getConfig().get("spawn-location"));
 
             }else{
-                if (custom) player.sendMessage(cf.getPrefix()+"§4錯誤 -> §c本服在沒有為插件設置重生點的情況下開啟了自定義重生位置，請通知管理員。");
+                if (custom) {
+                    player.sendMessage(cf.getPrefix()+"§4錯誤 -> §c本插件的自定義重生位置為空，請通知管理員。");
+                    player.sendMessage(cf.getPrefix()+"§4錯誤 -> §c已把重生點重新指向至默認位置。");
+                }
                 col.getLoc().put(player.getUniqueId(),player.getLocation());
             }
             count.startCountdown(player);
