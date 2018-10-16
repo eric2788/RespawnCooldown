@@ -13,10 +13,15 @@ public class Collection {
     private HashMap<Player, Integer> countdown = new HashMap<>();
     private HashMap<Player, Location> loc = new HashMap<>();
     private HashSet<UUID> respawning = new HashSet<>();
+    private HashMap<Player, Integer> timer = new HashMap<>();
     private static Collection collect;
 
     public HashMap<Player, Integer> getCountdown() {
         return countdown;
+    }
+    
+    public HashMap<Player, Integer> getTimer() {
+        return timer;
     }
 
     public static Collection getInstance() {
