@@ -47,7 +47,7 @@ public class EventListener implements Listener {
         if (col.getCountdown().containsKey(player)) return;
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
             count.startCountdown(player);
-        },40L);
+        },20L);
     }
 
     @EventHandler
