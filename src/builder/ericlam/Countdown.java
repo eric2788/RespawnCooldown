@@ -32,7 +32,7 @@ public class Countdown {
         }
         gm.put(player,player.getGameMode());
         player.setGameMode(GameMode.SPECTATOR);
-        player.sendTitle(cf.msgYamlTranslate("dead-title"),cf.msgYamlTranslate("dead-subtitle"),10,(int)(origitime - origitime/1.4),10);
+        player.sendTitle(cf.msgYamlTranslate("dead-title"),cf.msgYamlTranslate("dead-subtitle"),10,(int)(origitime - origitime/1.2)*20,10);
         if(!timer.containsKey(player)) timer.put(player, origitime);
         int time = timer.get(player);
         int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, ()->{
