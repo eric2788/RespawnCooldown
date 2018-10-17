@@ -5,6 +5,9 @@
 
 ### 前置插件: Vault
 
+## 演示
+[![插件演示](https://img.youtube.com/vi/VnkZMglY6Lk/0.jpg)](https://www.youtube.com/watch?v=VnkZMglY6Lk)
+
 ## 功能
   - 重生傳送間隔
   - 自定義物品打開略過界面
