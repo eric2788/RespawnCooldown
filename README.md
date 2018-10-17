@@ -1,6 +1,8 @@
 # RespawnCooldown
 受委託於匿名伺服器
+
 版本: 1.12.2
+
 前置插件: Vault
 
 ## 功能
