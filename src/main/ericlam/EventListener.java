@@ -24,6 +24,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -50,7 +51,6 @@ public class EventListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
             if (custom && customNotNull){
                  col.getLoc().put(player.getUniqueId(),(Location)cf.getConfig().get("spawn-location"));
-
             }else{
                 if (custom) {
                     player.sendMessage(cf.getPrefix()+"§4錯誤 -> §c本插件的自定義重生位置為空，請通知管理員。");
@@ -112,6 +112,7 @@ public class EventListener implements Listener {
         Material skipitem = Material.getMaterial(guiyml.getString("skip-item.material"));
         Material waititem = Material.getMaterial(guiyml.getString("wait-item.material"));
         if (inventory == null) return;
+        if (item == null) return;
         if (e.getSlotType() == InventoryType.SlotType.OUTSIDE) return;
         if (!col.getCountdown().containsKey(player)) return;
         if (inventory.getName().equals(gui.getName())){
@@ -124,6 +125,7 @@ public class EventListener implements Listener {
                     col.getTimer().remove(player.getUniqueId());
                     col.getLoc().remove(player.getUniqueId());
                     Respawngui.getInstance().removePlayerItem(player);
+
                 } else{
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("not-enough-money"));
                     player.closeInventory();

@@ -1,5 +1,6 @@
 package builder.ericlam;
 
+import file.ericlam.Collection;
 import file.ericlam.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,18 +10,18 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-
 public class Respawngui {
     private Inventory gui;
     private ItemStack skipbook;
     private static Respawngui respawngui;
     private ConfigManager cf;
+    private Collection collection;
     private FileConfiguration guiyml;
 
     private Respawngui(){
         cf = ConfigManager.getInstance();
         guiyml = ConfigManager.getInstance().getGui();
+        collection = Collection.getInstance();
     }
 
     private String translate(String path){
@@ -57,12 +58,17 @@ public class Respawngui {
 
     public void givePlayerItem(Player player){
         //if (player.getInventory().contains(skipbook)) return;
+        ItemStack item = player.getInventory().getItem(22);
+        if (item == null) item = new ItemStack(Material.AIR);
+        collection.getPlacedItem().put(player.getUniqueId(),item.clone());
         player.getInventory().setItem(22,skipbook);
     }
 
     public void removePlayerItem(Player player){
         //if (!player.getInventory().contains(skipbook)) return;
+        ItemStack item = collection.getPlacedItem().get(player.getUniqueId());
         player.getInventory().remove(skipbook);
+        if (item != null) player.getInventory().setItem(22,item);
     }
 
     public ItemStack getSkipbook() {

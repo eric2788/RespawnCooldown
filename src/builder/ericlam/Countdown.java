@@ -8,11 +8,15 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 
+import java.rmi.server.UID;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -32,6 +36,8 @@ public class Countdown {
             return;
         }
         gm.put(player.getUniqueId(),player.getGameMode());
+        ItemStack replace = player.getInventory().getItem(22);
+        if (replace == null) replace = new ItemStack(Material.AIR);
         player.setGameMode(GameMode.SPECTATOR);
         player.sendTitle(cf.msgYamlTranslate("dead-title"),cf.msgYamlTranslate("dead-subtitle"),10,(int)(origitime - origitime/1.2)*20,10);
         if(!timer.containsKey(player.getUniqueId())) {
