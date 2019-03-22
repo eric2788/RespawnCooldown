@@ -30,6 +30,13 @@ public class Countdown {
     private FileConfiguration config = cf.getConfig();
     private final int origitime = config.getInt("respawn-delay");
     private Plugin plugin = RC.plugin;
+    private static Countdown countdown;
+
+    public static Countdown getInstance() {
+        if (countdown == null) countdown = new Countdown();
+        return countdown;
+    }
+    private Countdown(){}
     public void startCountdown(Player player){
         if (count.containsKey(player)) {
             //player.sendMessage("DEBUG: count contain player, returned.");
@@ -75,11 +82,11 @@ public class Countdown {
             //player.sendMessage("DEBUG: count not have player, returned");
             return;
         }
-        Bukkit.getScheduler().cancelTask(count.get(player));
         Location location = col.getLoc().get(player.getUniqueId());
         Respawngui.getInstance().removePlayerItem(player);
         player.setGameMode(gm.get(player.getUniqueId()));
         player.teleport(location);
+        Bukkit.getScheduler().cancelTask(count.get(player));
         count.remove(player);
         //player.sendMessage("DEBUG: removed countdown/gm/loc");
     }

@@ -25,12 +25,13 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class EventListener implements Listener {
     private Collection col = Collection.getInstance();
-    private Countdown count = new Countdown();
+    private Countdown count = Countdown.getInstance();
     private Economy eco;
     private Plugin plugin;
 
@@ -118,7 +119,7 @@ public class EventListener implements Listener {
         if (inventory.getName().equals(gui.getName())){
             if (item.getType() == skipitem){
                 if (eco.withdrawPlayer(player,price).type == EconomyResponse.ResponseType.SUCCESS) {
-                    new Countdown().stopCountDown(player);
+                    count.stopCountDown(player);
                     player.sendMessage(cf.getPrefix()+cf.msgYamlTranslate("spent").replace("<money>",price+""));
                     player.closeInventory();
                     col.getGm().remove(player.getUniqueId());
@@ -139,7 +140,7 @@ public class EventListener implements Listener {
             e.setCancelled(true);
         }
         if (item.getType().equals(Material.AIR)) return;
-        if (item.getItemMeta().getDisplayName().equals(Respawngui.getInstance().getSkipbook().getItemMeta().getDisplayName())){
+        if (item.isSimilar(Respawngui.getInstance().getSkipbook())){
             player.openInventory(gui);
             e.setCancelled(true);
         }

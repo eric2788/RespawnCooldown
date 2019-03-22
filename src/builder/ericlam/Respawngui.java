@@ -69,6 +69,7 @@ public class Respawngui {
         ItemStack item = collection.getPlacedItem().get(player.getUniqueId());
         player.getInventory().remove(skipbook);
         if (item != null) player.getInventory().setItem(22,item);
+        collection.getPlacedItem().remove(player.getUniqueId());
     }
 
     public ItemStack getSkipbook() {

@@ -1,5 +1,6 @@
 package main.ericlam;
 
+import builder.ericlam.Countdown;
 import builder.ericlam.Respawngui;
 import file.ericlam.Collection;
 import file.ericlam.ConfigManager;
@@ -86,8 +87,7 @@ public class RC extends JavaPlugin {
         for (OfflinePlayer p : Bukkit.getOfflinePlayers()){
             UUID uuid = p.getUniqueId();
             if (p.isOnline() && col.getCountdown().containsKey(p.getPlayer())) {
-                p.getPlayer().setGameMode(col.getGm().get(uuid));
-                p.getPlayer().teleport(col.getLoc().get(uuid));
+                Countdown.getInstance().stopCountDown(p.getPlayer());
             }
         }
         getLogger().info("重生冷卻插件已被關閉。");
