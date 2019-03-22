@@ -15,7 +15,8 @@
   - 自定義略過界面
   - 可自定義重生位置
 
-## [下載插件](http://ceesty.com/wZzx2p)
+## 下載
+[下載插件](http://ceesty.com/wZzx2p) | [Mirror](http://www.mediafire.com/file/bobbux49b60c2pl/RespawnCooldown.jar/file)
 
 ## 截圖
   ![重生](https://media.discordapp.net/attachments/501029399970447390/501820319640584192/c7113f0dfaa91465ebb68d1cddfe2fd7.png)
