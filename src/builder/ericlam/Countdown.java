@@ -13,10 +13,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 
-import java.rmi.server.UID;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -82,6 +80,7 @@ public class Countdown {
             //player.sendMessage("DEBUG: count not have player, returned");
             return;
         }
+        player.setSpectatorTarget(null);
         Location location = col.getLoc().get(player.getUniqueId());
         Respawngui.getInstance().removePlayerItem(player);
         player.setGameMode(gm.get(player.getUniqueId()));
